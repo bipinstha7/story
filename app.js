@@ -2,13 +2,17 @@ const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
+const exphbs = require("express-handlebars");
 
 const app = express();
 
 // passport config
 require("./config/passport")(passport);
+
 // load routes 
 const auth = require("./routes/auth");
+const index = require("./routes/index");
+
 // load keys
 const keys = require("./config/keys");
 
@@ -39,17 +43,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// handlebars middleware
+app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
+
 //**********************************************
 // 	 MIDDLEWARES end
 //**********************************************
 
-// home/index route
-app.get("/", (req, res) => {
-  res.send("This is index/home page.")
-});
 
 // use routes
 app.use(auth);
+app.use(index);
 
 
 const port = process.env.PORT || 3000;
