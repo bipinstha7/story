@@ -1,0 +1,23 @@
+{
+  "name": "story",
+  "version": "1.0.0",
+  "description": "app to share public or write private stories",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bipinstha7/story.git"
+  },
+  "author": "bipin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bipinstha7/story/issues"
+  },
+  "homepage": "https://github.com/bipinstha7/story#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.1.3"
+  }
+}
