@@ -16,13 +16,29 @@
 </head>
 <body>
 
-  <div class="container">
-    {{{body}}}
-  </div>
+  {{> _header}}
+  <main>
+    <div class="container">
+      {{{body}}}
+    </div>
+    </main>
+
+  {{!-- jQuery  --}}
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 
   <!-- Compiled and minified Materialize JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
+  {{!-- SIDE NAV SCRIPT --}}
+  <script>
+    $(document).ready(() => {
+        $('.sidenav').sidenav();
+      });
+  </script>
+        
 </body>
 
 </html>
