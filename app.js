@@ -6,9 +6,16 @@ const app = express();
 
 // passport config
 require("./config/passport")(passport);
-
 // load routes 
 const auth = require("./routes/auth");
+// load keys
+const keys = require("./config/keys");
+
+// mongoose connect
+mongoose.connect(keys.mongoURI)
+  .then(() => console.log("mongodb/mlab connected"))
+  .catch(err => console.log("Error on connecting mongodb/mlab:", err));
+
 
 // home/index route
 app.get("/", (req, res) => {
