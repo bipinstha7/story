@@ -17,7 +17,8 @@ router.get("/stories", (req, res) => {
 // show single story 
 router.get("/stories/show/:id", (req, res) => {
   Story.findOne({_id: req.params.id})
-    .populate("user")
+    .populate("user") // populate to those schemas which is refered as type: Schema.Types.ObjectId
+    .populate("comments.commentUser")
     .then(story => {
       res.render("stories/show", {story: story});
     })
