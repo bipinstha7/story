@@ -8,8 +8,11 @@ const Story = require("../models/Story");
 router.get("/stories", (req, res) => {
   Story.find({status: "public"})
     .populate("user")
+    .sort({date: "desc"})
     .then(stories => {
-      res.render("stories/index", {stories: stories});
+      res.render("stories/index", {
+        stories: stories
+      });
     })
     .catch(err => console.log("Error on fetching stories from the database: /stories", err));
 });
@@ -25,6 +28,30 @@ router.get("/stories/show/:id", (req, res) => {
     .catch(err => console.log("Error on finding story: /stories/show/:id", err));
 });
 
+// list stories from a specific user
+router.get("/stories/user/:userId", (req, res) => {
+  Story.find({
+    user: req.params.userId,
+    status: "public"
+  })
+  .populate("user")
+  .then(stories => {
+    res.render("stories/index", {stories: stories})
+  })
+  .catch(err => console.log("Error finding specific stories: /stories/user/:userId", err));
+});
+
+// logged in users stories
+router.get("/stories/my", ensureAuthenticated, (req, res) => {
+  Story.find({
+    user: req.user.id
+  })
+  .populate("user")
+  .then(stories => {
+    res.render("stories/index", {stories: stories})
+  })
+  .catch(err => console.log("Error finding my stories: /stories/my", err));
+});
 
 // add story form
 router.get("/stories/add", ensureAuthenticated,  (req, res) => {
@@ -61,7 +88,11 @@ router.post("/stories", ensureAuthenticated,  (req, res) => {
 router.get("/stories/edit/:id", ensureAuthenticated,  (req, res) => {
   Story.findOne({_id: req.params.id})
     .then(story => {
-      res.render("stories/edit", {story: story});
+      if(story.user != req.user.id) {
+        res.redirect('/stories');
+      } else {
+        res.render("stories/edit", {story: story});
+      }
     })
     .catch(err => console.log("Error on finding edit story form: /stories/edit/:id", err));
 });
