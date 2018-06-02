@@ -8,17 +8,17 @@ const StorySchema = new Schema({
     type: String,
     required: true
   },
-  body: {
-    type: String,
-    required: true
-  },
   status: {
     type: String,
-    default: public
+    default: "public"
   },
   allowComments: {
     type: Boolean,
     default: true
+  },
+  body: {
+    type: String,
+    required: true
   },
   comments: [{
     commentBody: {
@@ -30,12 +30,12 @@ const StorySchema = new Schema({
       default: Date.now
     },
     commentUser: {
-      type: Schema.types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User"
     }
   }],
   user: {
-    type: Schema.types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "User"
   },
   date: {
@@ -44,5 +44,5 @@ const StorySchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("Story", StorySchema, "stories"); 
+module.exports = mongoose.model("Story", StorySchema, "stories");
 // 3rd options stories forces mongoose to store story name as stories but not storys

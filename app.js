@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -16,6 +17,9 @@ const stories = require("./routes/stories");
 
 // load keys
 const keys = require("./config/keys");
+
+// handlebars helper
+const {truncate, stripTags, formatDate, select} = require("./helpers/hbs");
 
 // mongoose connect
 mongoose.connect(keys.mongoURI)
@@ -45,11 +49,23 @@ app.use((req, res, next) => {
 });
 
 // handlebars middleware
-app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.engine("handlebars", exphbs({
+  helpers: {
+    truncate: truncate,
+    stripTags: stripTags,
+    formatDate: formatDate,
+    select: select
+  },
+  defaultLayout: "main"
+}));
 app.set("view engine", "handlebars");
 
 // set static folder
 app.use(express.static(__dirname + "/public"));
+
+// body-parser
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 //**********************************************
 // 	 MIDDLEWARES end
