@@ -12,16 +12,23 @@
   {{!-- fontawesome --}}
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+  {{!-- custom css --}}
+  <link rel="stylesheet" href="/css/style.css">
+
   <title>story</title>
 </head>
 <body>
 
   {{> _header}}
+  {{#if currentUser}}
+    {{> _add-btn}}
+  {{/if}}
   <main>
     <div class="container">
       {{{body}}}
     </div>
-    </main>
+  </main>
+  {{> _footer}}
 
   {{!-- jQuery  --}}
   <script
@@ -32,10 +39,18 @@
   <!-- Compiled and minified Materialize JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
+  {{!-- CK editor --}}
+  <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+
   {{!-- SIDE NAV SCRIPT --}}
   <script>
     $(document).ready(() => {
         $('.sidenav').sidenav();
+        $('select').formSelect();
+      });
+
+      CKEDITOR.replace('textarea', {
+        plugins: 'wysiwygarea,toolbar,basicstyles,link'
       });
   </script>
         

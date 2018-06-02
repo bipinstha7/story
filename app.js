@@ -12,6 +12,7 @@ require("./config/passport")(passport);
 // load routes 
 const auth = require("./routes/auth");
 const index = require("./routes/index");
+const stories = require("./routes/stories");
 
 // load keys
 const keys = require("./config/keys");
@@ -47,6 +48,9 @@ app.use((req, res, next) => {
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
+// set static folder
+app.use(express.static(__dirname + "/public"));
+
 //**********************************************
 // 	 MIDDLEWARES end
 //**********************************************
@@ -55,6 +59,7 @@ app.set("view engine", "handlebars");
 // use routes
 app.use(auth);
 app.use(index);
+app.use(stories);
 
 
 const port = process.env.PORT || 3000;
