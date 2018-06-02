@@ -66,6 +66,61 @@ router.get("/stories/edit/:id", ensureAuthenticated,  (req, res) => {
 });
 
 // Edit form process: PUT
+router.put("/stories/:id", ensureAuthenticated, (req, res) => {
+  let allowComments;
+
+  if(req.body.allowComments) {
+    allowComments = true;
+  } else {
+    allowComments = false;
+  }
+
+  const editedStory = {
+    title: req.body.title,
+    status: req.body.status,
+    allowComments: allowComments,
+    body: req.body.textarea
+  }
+
+  Story.findByIdAndUpdate(req.params.id, editedStory)
+    .then(story => {
+      res.redirect("/dashboard");
+    })
+    .catch(err => {
+			res.status(500).send(err);
+			console.log("put: /stories/:id-", err);
+		});
+});
+
+// delete story
+router.delete("/stories/:id", ensureAuthenticated, (req, res) => {
+  Story.findByIdAndRemove(req.params.id)
+    .then(() => res.redirect("/dashboard"))
+    .catch(err => {
+			res.status(500).send(err);
+			console.log("delete: /stories/:id", err);
+		});
+});
+
+// add comment process: POST
+router.post("/stories/comment/:id", (req, res) => {
+  Story.findById(req.params.id)
+    .then(story => {
+      const newComment = {
+        commentBody: req.body.commentBody,
+        commentUser: req.user._id
+      }
+
+      // Add to comments array
+      story.comments.unshift(newComment);
+      story.save()
+        .then(story => {
+          res.redirect(`/stories/show/${story._id}`);
+        })
+
+    })
+});
+
 
 
 module.exports = router;

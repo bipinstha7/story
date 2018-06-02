@@ -4,6 +4,7 @@ const passport = require("passport");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
 
 const app = express();
 
@@ -66,6 +67,9 @@ app.use(express.static(__dirname + "/public"));
 // body-parser
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+// method override middleware
+app.use(methodOverride("_method"));
 
 //**********************************************
 // 	 MIDDLEWARES end
