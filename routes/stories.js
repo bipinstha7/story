@@ -23,7 +23,19 @@ router.get("/stories/show/:id", (req, res) => {
     .populate("user") // populate to those schemas which is refered as type: Schema.Types.ObjectId
     .populate("comments.commentUser")
     .then(story => {
-      res.render("stories/show", {story: story});
+      if(story.status == "public") {
+        res.render("stories/show", {story: story});
+      } else {
+        if(req.user) {
+          if(req.user.id == story.user._id) {
+            res.render("stories/show", {story: story});
+          } else {
+            res.redirect("/stories");
+          }
+        } else {
+          res.redirect("/stories");
+        }
+      }
     })
     .catch(err => console.log("Error on finding story: /stories/show/:id", err));
 });
