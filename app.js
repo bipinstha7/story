@@ -82,6 +82,11 @@ app.use(auth);
 app.use(index);
 app.use(stories);
 
+// use routes
+// app.use("/auth",auth);
+// app.use("/",index);
+// app.use("/stories",stories);
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
