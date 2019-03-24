@@ -80,6 +80,9 @@ router.post('/stories', ensureAuthenticated, (req, res) => {
 		allowComments = false
 	}
 
+	// it is same as the creating new instance of Story and Story.save
+	// create automatically creates the instance of Story
+
 	const newStory = {
 		title: req.body.title,
 		status: req.body.status,
