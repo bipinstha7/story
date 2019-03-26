@@ -2,58 +2,57 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!-- Compiled and minified Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<!-- Compiled and minified Materialize CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 
-  {{!-- fontawesome --}}
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	{{!-- fontawesome --}}
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  {{!-- custom css --}}
-  <link rel="stylesheet" href="/css/style.css">
+	{{!-- custom css --}}
+	<link rel="stylesheet" href="/css/style.css">
 
-  <title>story</title>
+	<title>story</title>
 </head>
+
 <body>
 
-  {{> _header}}
-  {{#if currentUser}}
-    {{> _add-btn}}
-  {{/if}}
-  <main>
-    <div class="container">
-      {{{body}}}
-    </div>
-  </main>
-  {{> _footer}}
+	{{> _header}}
+	{{#if currentUser}}
+	{{> _add-btn}}
+	{{/if}}
+	<main>
+		<div class="container">
+			{{{body}}}
+		</div>
+	</main>
+	{{> _footer}}
 
-  {{!-- jQuery  --}}
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+	{{!-- jQuery  --}}
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-  <!-- Compiled and minified Materialize JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	<!-- Compiled and minified Materialize JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
-  {{!-- CK editor --}}
-  <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+	{{!-- CK editor --}}
+	<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
 
-  {{!-- SIDE NAV SCRIPT --}}
-  <script>
-    $(document).ready(() => {
-        $('.sidenav').sidenav();
-        $('select').formSelect();
-      });
+	{{!-- SIDE NAV SCRIPT --}}
+	<script>
+		$(document).ready(() => {
+			$('.sidenav').sidenav();
+			$('select').formSelect();
+		});
 
-      CKEDITOR.replace('textarea', {
-        plugins: 'wysiwygarea,toolbar,basicstyles,link'
-      });
-  </script>
-        
+		CKEDITOR.replace('textarea', {
+			plugins: 'wysiwygarea,toolbar,basicstyles,link'
+		});
+	</script>
+
 </body>
 
 </html>
