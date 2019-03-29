@@ -79,7 +79,7 @@ app.use(bodyParser.json())
 app.use(methodOverride('_method'))
 
 //**********************************************
-// 	 MIDDLEWARES
+// 	 MIDDLEWARES end
 //**********************************************
 
 // use routes
